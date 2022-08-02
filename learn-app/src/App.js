@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+
+    state = {
+        username:"",
+        mobile:"",
+        email:"",
+        city:"",
+    }
+
+    changeData = (e) => {
+        let val = e.target.name;
+        let myVal = e.target.value;
+        this.setState({[val]:myVal})
+    }
+
+    formSubmit = (e) =>{
+        e.preventDefault();
+        console.log(this.state.username);
+    }
+
+  render() {
+    return(
+        <div className="App">
+          <h2>Hello {this.state.username}</h2>
+          <h2>Your Mobile Number: {this.state.mobile}</h2>
+          <h2>Your Email: {this.state.email}</h2>
+          <h2>You Live in: {this.state.city}</h2>
+          <div>
+            <form onSubmit={this.formSubmit}>
+              <div className="form-group" style={{marginLeft:200}}>
+                <input type="text" name="username" placeholder="Your name" onChange={this.changeData}></input><br/><br/>
+                <input type="text" name="mobile" placeholder="Contact Number" onChange={this.changeData}></input><br/><br/>
+                <input type="text" name="email" placeholder="Email" onChange={this.changeData}></input><br/><br/>
+                <input type="text" name="city" placeholder="City" onChange={this.changeData}></input><br/><br/>
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    )
+  }
 }
 
 export default App;
